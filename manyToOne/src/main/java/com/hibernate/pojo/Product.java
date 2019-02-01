@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -30,7 +31,7 @@ public class Product {
 	}
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	public Integer getId() {
 		return id;
@@ -55,8 +56,7 @@ public class Product {
 	public void setPrice(float price) {
 		this.price = price;
 	}
-
-	@OneToMany(mappedBy = "primarykey.product",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "product",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	public Set<StoreProduct> getStoreProduct() {
 		return storeProducts;
 	}

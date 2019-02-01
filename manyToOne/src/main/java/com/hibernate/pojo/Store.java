@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -19,9 +20,8 @@ public class Store {
 	private String name;
 	private String address;
 	private String mobile;
-	private Set<StoreProduct> storeProducts = new HashSet<StoreProduct>();
 	private Set<User> employee = new HashSet<User>();
-
+	private Set<StoreProduct> storeProducts = new HashSet<StoreProduct>();
 	public Store() {
 	}
 
@@ -31,12 +31,8 @@ public class Store {
 		this.mobile = mobile;
 	}
 
-	public void addProduct(StoreProduct product) {
-		this.storeProducts.add(product);
-	}
-
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	public Integer getId() {
 		return id;
@@ -78,7 +74,7 @@ public class Store {
 		this.employee = employee;
 	}
 
-	@OneToMany(mappedBy = "primarykey.store", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "store", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	public Set<StoreProduct> getStoreProduct() {
 		return storeProducts;
 	}

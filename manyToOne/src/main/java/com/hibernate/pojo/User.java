@@ -1,5 +1,8 @@
 package com.hibernate.pojo;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,9 +29,9 @@ public class User {
 	private String mobile;
 	private Store store;
 	private Role role;
-	public User() {
-	}
-
+	private Set<Order> order = new HashSet<Order>();
+	public User() {}
+	
 	public User(String username, String password, String firstname, String lastname, String address,
 			String email, String mobile) {
 		this.username = username;
@@ -37,12 +41,11 @@ public class User {
 		this.address = address;
 		this.email = email;
 		this.mobile = mobile;
-
 	}
 	
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY )
+	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	public Integer getId() {
 		return id;
 	}
@@ -96,7 +99,7 @@ public class User {
 		this.mobile = mobile;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idstore")
 	public Store getStore() {
 		return store;
@@ -104,7 +107,7 @@ public class User {
 	public void setStore(Store store) {
 		this.store = store;
 	}
-	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idrole")
 	public Role getRole() {
 		return role;
@@ -112,6 +115,15 @@ public class User {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+	
+	@OneToMany
+	public Set<Order> getOrders() {
+		return order;
+	}
+
+	public void setOrders(Set<Order> orders) {
+		this.order = orders;
 	}
 
 	@Override
