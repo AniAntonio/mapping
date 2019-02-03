@@ -1,4 +1,4 @@
-package com.hibernate.pojo;
+package com.hibernate.model;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -29,7 +29,6 @@ public class User {
 	private String mobile;
 	private Store store;
 	private Role role;
-	private Set<Order> order = new HashSet<Order>();
 	public User() {}
 	
 	public User(String username, String password, String firstname, String lastname, String address,
@@ -116,15 +115,7 @@ public class User {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	
-	@OneToMany
-	public Set<Order> getOrders() {
-		return order;
-	}
 
-	public void setOrders(Set<Order> orders) {
-		this.order = orders;
-	}
 
 	@Override
 	public String toString() {

@@ -1,4 +1,4 @@
-package com.hibernate.pojo;
+package com.hibernate.model;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,23 +13,22 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import model.StoreProduct;
-
 @Entity
-@Table(name = "product")
-public class Product {
-
+@Table(name = "store")
+public class Store {
 	private Integer id;
 	private String name;
-	private float price;
+	private String address;
+	private String mobile;
+	private Set<User> employee = new HashSet<User>();
 	private Set<StoreProduct> storeProducts = new HashSet<StoreProduct>();
-
-	public Product() {
+	public Store() {
 	}
 
-	public Product(String name, float price) {
+	public Store(String name, String address, String mobile) {
 		this.name = name;
-		this.price = price;
+		this.address = address;
+		this.mobile = mobile;
 	}
 
 	@Id
@@ -51,14 +50,31 @@ public class Product {
 		this.name = name;
 	}
 
-	public float getPrice() {
-		return price;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setPrice(float price) {
-		this.price = price;
+	public void setAddress(String address) {
+		this.address = address;
 	}
-	@OneToMany(mappedBy = "product",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	@OneToMany(mappedBy = "store",fetch = FetchType.LAZY,cascade=CascadeType.ALL, orphanRemoval = true)	
+	public Set<User> getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Set<User> employee) {
+		this.employee = employee;
+	}
+
+	@OneToMany(mappedBy = "store", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	public Set<StoreProduct> getStoreProduct() {
 		return storeProducts;
 	}
@@ -73,7 +89,7 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", price=" + price + "]";
+		return "Store [id=" + id + ", name=" + name + ", address=" + address + ", mobile=" + mobile + "]";
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.hibernate.pojo;
+package com.hibernate.model;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.hibernate.model.Product;
+
 @Entity
 @Table(name = "storeproduct")
 public class StoreProduct {
@@ -21,7 +23,6 @@ public class StoreProduct {
 	private Product product;
 	private int quantity;
 	private boolean valid;
-	
 	
 	@Id
 	@Column(name = "id")

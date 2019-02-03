@@ -6,13 +6,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
-import com.hibernate.pojo.Order;
 import com.hibernate.pojo.Product;
-import com.hibernate.pojo.Role;
-import com.hibernate.pojo.Store;
-import com.hibernate.pojo.StoreProduct;
 import com.hibernate.util.HibernateUtil;
-import com.hibernate.pojo.User;
+
+import model.Order;
+import model.Role;
+import model.Store;
+import model.StoreProduct;
+import model.User;
 
 public class TestMain {
 	private static EntityManager em = HibernateUtil.getEntityManagerFactory().createEntityManager();
@@ -47,7 +48,7 @@ public class TestMain {
 			System.out.println(u.getClient());
 		}*/
 
-		create();
+		
 		tx.commit();
 		em.close();
 	}

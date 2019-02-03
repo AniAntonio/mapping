@@ -1,6 +1,8 @@
-package com.hibernate.pojo;
+package com.hibernate.model;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,11 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
 @Table(name = "orders")
-public class Order {
-	private Integer id;
+public class Order { 
+	private Integer id; 
 	private String date;
 	private float orderprice;;
 	private Store store;
@@ -22,7 +25,7 @@ public class Order {
 	private String message;
 	private User client;
 	private User employee;
-	
+	private Set<OrderProduct> orderProducts= new HashSet<OrderProduct>();
 	
 	@Id
 	@Column(name = "id")
@@ -86,6 +89,13 @@ public class Order {
 		this.message = message;
 	}
 	
+	@OneToMany(mappedBy = "order",fetch = FetchType.LAZY)
+	public Set<OrderProduct> getOrderProducts() {
+		return orderProducts;
+	}
+	public void setOrderProducts(Set<OrderProduct> orderProducts) {
+		this.orderProducts = orderProducts;
+	}
 	@Override
 	public String toString() {
 		return "Order [id=" + id + ", date=" + date + ", orderprice=" + orderprice 
