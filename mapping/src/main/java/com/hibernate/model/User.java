@@ -29,6 +29,7 @@ public class User {
 	private String mobile;
 	private Store store;
 	private Role role;
+	private boolean valid;
 	public User() {}
 	
 	public User(String username, String password, String firstname, String lastname, String address,
@@ -98,6 +99,14 @@ public class User {
 		this.mobile = mobile;
 	}
 	
+	public boolean isValid() {
+		return valid;
+	}
+
+	public void setValid(boolean valid) {
+		this.valid = valid;
+	}
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idstore")
 	public Store getStore() {

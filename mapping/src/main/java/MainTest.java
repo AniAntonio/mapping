@@ -33,15 +33,15 @@ public class MainTest {
 		  storeQuery.setParameter("id", 2);*/
 		 
 
-		create();
-		 Order order = em.find(Order.class, 2);
+		//create();
+	/*	 Order order = em.find(Order.class, 2);
 		 
 		  for (OrderProduct orderproduct : order.getOrderProducts()) {
 			Product p = orderproduct.getStoreProduct().getProduct();
 			System.out.println(p);
-				
+				}*/
 			
-		}
+		
 		  
 		 
 		 
@@ -63,7 +63,7 @@ public class MainTest {
 		op.setOrderquantity(3);
 		op.setStoreProduct(sp);
 		op.setPrice(sp.getProduct().getPrice());
-		op.setValidity(true);
+		op.setValid(true);
 		em.persist(op);
 	}
 }

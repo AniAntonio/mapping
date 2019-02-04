@@ -25,6 +25,7 @@ public class Order {
 	private String message;
 	private User client;
 	private User employee;
+	private boolean valid;
 	private Set<OrderProduct> orderProducts= new HashSet<OrderProduct>();
 	
 	@Id
@@ -95,6 +96,13 @@ public class Order {
 	}
 	public void setOrderProducts(Set<OrderProduct> orderProducts) {
 		this.orderProducts = orderProducts;
+	}
+	
+	public boolean isValid() {
+		return valid;
+	}
+	public void setValid(boolean valid) {
+		this.valid = valid;
 	}
 	@Override
 	public String toString() {

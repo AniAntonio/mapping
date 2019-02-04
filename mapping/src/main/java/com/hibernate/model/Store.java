@@ -20,6 +20,7 @@ public class Store {
 	private String name;
 	private String address;
 	private String mobile;
+	private boolean valid;
 	private Set<User> employee = new HashSet<User>();
 	private Set<StoreProduct> storeProducts = new HashSet<StoreProduct>();
 	public Store() {
@@ -65,6 +66,15 @@ public class Store {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+	
+	public boolean isValid() {
+		return valid;
+	}
+
+	public void setValid(boolean valid) {
+		this.valid = valid;
+	}
+
 	@OneToMany(mappedBy = "store",fetch = FetchType.LAZY,cascade=CascadeType.ALL, orphanRemoval = true)	
 	public Set<User> getEmployee() {
 		return employee;

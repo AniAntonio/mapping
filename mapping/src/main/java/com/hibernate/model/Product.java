@@ -20,6 +20,7 @@ public class Product {
 	private Integer id;
 	private String name;
 	private float price;
+	private boolean valid;
 	private Set<StoreProduct> storeProducts = new HashSet<StoreProduct>();
 
 	public Product() {
@@ -56,7 +57,8 @@ public class Product {
 	public void setPrice(float price) {
 		this.price = price;
 	}
-	@OneToMany(mappedBy = "product",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	public Set<StoreProduct> getStoreProduct() {
 		return storeProducts;
 	}
@@ -67,6 +69,14 @@ public class Product {
 
 	public void addStoreProduct(StoreProduct storeProduct) {
 		this.storeProducts.add(storeProduct);
+	}
+
+	public boolean isValid() {
+		return valid;
+	}
+
+	public void setValid(boolean valid) {
+		this.valid = valid;
 	}
 
 	@Override

@@ -18,7 +18,7 @@ public class OrderProduct {
 	private StoreProduct storeProduct; 
 	private int orderquantity;
 	private float price;
-	private boolean validity;
+	private boolean valid;
 	
 	
 	@Id
@@ -58,11 +58,11 @@ public class OrderProduct {
 	public void setPrice(float price) {
 		this.price = price;
 	}
-	public boolean isValidity() {
-		return validity;
+	public boolean isValid() {
+		return valid;
 	}
-	public void setValidity(boolean validity) {
-		this.validity = validity;
+	public void setValid(boolean valid) {
+		this.valid = valid;
 	}
 
 	
