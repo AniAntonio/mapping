@@ -1,4 +1,4 @@
-package com.hibernate.model;
+package entities;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.hibernate.model.Product;
+import entities.Product;
 
 @Entity
 @Table(name = "storeproduct")

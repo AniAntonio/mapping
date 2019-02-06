@@ -5,13 +5,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
-import com.hibernate.model.Order;
-import com.hibernate.model.Product;
-import com.hibernate.model.OrderProduct;
-import com.hibernate.model.Store;
-import com.hibernate.model.StoreProduct;
-import com.hibernate.model.User;
-import com.hibernate.util.HibernateUtil;
+import entities.Order;
+import entities.OrderProduct;
+import entities.Product;
+import entities.Role;
+import entities.State;
+import entities.Store;
+import entities.StoreProduct;
+import entities.User;
+import utility.HibernateUtil;
 
 public class MainTest {
 	private static EntityManager em = HibernateUtil.getEntityManagerFactory().createEntityManager();
@@ -33,7 +35,7 @@ public class MainTest {
 		  storeQuery.setParameter("id", 2);*/
 		 
 
-		//create();
+		  createOrderProduct();
 	/*	 Order order = em.find(Order.class, 2);
 		 
 		  for (OrderProduct orderproduct : order.getOrderProducts()) {
@@ -55,15 +57,57 @@ public class MainTest {
 	}
 	
 	
-	public static void create() {
-		StoreProduct sp = em.find(StoreProduct.class, 3);
-		OrderProduct op=new OrderProduct();
-		Order order = em.find(Order.class, 2);
-		op.setOrder(order);
-		op.setOrderquantity(3);
-		op.setStoreProduct(sp);
-		op.setPrice(sp.getProduct().getPrice());
-		op.setValid(true);
-		em.persist(op);
+	public static void createStore() {
+		Store store = new Store("Store1","Tirane","+355692884299");
+		store.setValid(true);
+		em.persist(store);
 	}
+	
+	public static void createProduct() {
+		Product product = new Product("Hat",600);
+		product.setValid(true);
+		em.persist(product);
+	}
+	
+	public static void createStoreProduct() {
+		Store store = em.find(Store.class, 7);
+		Product product = em.find(Product.class, 1);
+		StoreProduct storeproduct = new StoreProduct();
+		storeproduct.setQuantity(200);
+		storeproduct.setValid(true);
+		storeproduct.setStore(store);
+		storeproduct.setProduct(product);
+		em.persist(storeproduct);
+	}
+	
+	public static void createUser() {
+		User user = new User("miri","123","Miri","Hoxha","tirane","miri@gmail.com","+355672001400");
+		Role role = em.find(Role.class, 2);
+		user.setRole(role);
+		user.setValid(true);
+		em.persist(user);
+	}
+	
+	public static void createOrder() {
+		Order order = new Order();
+		order.setDate("05-02-2019");
+		order.setOrderprice(1200);
+		order.setState(em.find(State.class, 1));
+		order.setStore(em.find(Store.class, 7));
+		order.setValid(true);
+		order.setClient(em.find(User.class, 35));
+		order.setEmployee(em.find(User.class, 37));
+		em.persist(order);
+	}
+	
+	public static void createOrderProduct() {
+		OrderProduct orderProduct = new OrderProduct();
+		StoreProduct sp = em.find(StoreProduct.class, 2);
+		orderProduct.setStoreProduct(sp);
+		orderProduct.setOrder(em.find(Order.class, 3));
+		orderProduct.setPrice(sp.getProduct().getPrice());
+		orderProduct.setOrderquantity(2);
+		orderProduct.setValid(true);
+		em.persist(orderProduct);
+	} 
 }

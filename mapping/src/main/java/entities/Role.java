@@ -1,4 +1,4 @@
-package com.hibernate.model;
+package entities;
 
 import java.util.HashSet;
 import java.util.List;

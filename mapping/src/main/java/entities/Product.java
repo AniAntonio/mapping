@@ -1,4 +1,4 @@
-package com.hibernate.model;
+package entities;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,22 +14,21 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "store")
-public class Store {
+@Table(name = "product")
+public class Product {
+
 	private Integer id;
 	private String name;
-	private String address;
-	private String mobile;
+	private float price;
 	private boolean valid;
-	private Set<User> employee = new HashSet<User>();
 	private Set<StoreProduct> storeProducts = new HashSet<StoreProduct>();
-	public Store() {
+
+	public Product() {
 	}
 
-	public Store(String name, String address, String mobile) {
+	public Product(String name, float price) {
 		this.name = name;
-		this.address = address;
-		this.mobile = mobile;
+		this.price = price;
 	}
 
 	@Id
@@ -51,40 +50,15 @@ public class Store {
 		this.name = name;
 	}
 
-	public String getAddress() {
-		return address;
+	public float getPrice() {
+		return price;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setPrice(float price) {
+		this.price = price;
 	}
 
-	public String getMobile() {
-		return mobile;
-	}
-
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-	
-	public boolean isValid() {
-		return valid;
-	}
-
-	public void setValid(boolean valid) {
-		this.valid = valid;
-	}
-
-	@OneToMany(mappedBy = "store",fetch = FetchType.LAZY,cascade=CascadeType.ALL, orphanRemoval = true)	
-	public Set<User> getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(Set<User> employee) {
-		this.employee = employee;
-	}
-
-	@OneToMany(mappedBy = "store", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	public Set<StoreProduct> getStoreProduct() {
 		return storeProducts;
 	}
@@ -97,9 +71,17 @@ public class Store {
 		this.storeProducts.add(storeProduct);
 	}
 
+	public boolean isValid() {
+		return valid;
+	}
+
+	public void setValid(boolean valid) {
+		this.valid = valid;
+	}
+
 	@Override
 	public String toString() {
-		return "Store [id=" + id + ", name=" + name + ", address=" + address + ", mobile=" + mobile + "]";
+		return "Product [id=" + id + ", name=" + name + ", price=" + price + "]";
 	}
 
 }
